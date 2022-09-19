@@ -8,7 +8,7 @@
       <!-- Right side -->
       <div class="flex flex-row justify-end align-middle">
         <div
-          class="flex filter mr-10 relative items-center"
+          class="flex filter mr-10 relative items-center cursor-pointer"
           @click="toggleFilterMenu"
         >
           <span class="text-sm ">Filter by status</span>
@@ -19,25 +19,25 @@
           />
           <ul
             v-show="filterMenu"
-            class="filter-menu absolute w-30 top-9 list-none shadow-md bg-emerald-300"
+            class="filter-menu absolute w-30 top-10  list-none shadow-md bg-emerald-300"
           >
             <li
-              class="text-xs py-1 hover:bg-emerald-100 duration-300 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-emerald-100 duration-300 duration-300 px-2 cursor-pointer"
             >
               Draft
             </li>
             <li
-              class="text-xs py-1 hover:bg-emerald-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-emerald-100 duration-300 px-2 cursor-pointer"
             >
               Pending
             </li>
             <li
-              class="text-xs py-1 hover:bg-emerald-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-emerald-100 duration-300 px-2 cursor-pointer"
             >
               Paid
             </li>
             <li
-              class="text-xs py-1 hover:bg-emerald-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-emerald-100 duration-300 px-2 cursor-pointer"
             >
               Clear filter
             </li>
@@ -45,7 +45,7 @@
         </div>
         <div
           @click="newInvoice"
-          class="flex flex-1 items-center rounded-full bg-emerald-400 px-3 py-2 text-sm"
+          class="flex flex-1 items-center rounded-full bg-emerald-400 px-3 py-2  text-sm"
         >
           <div class="flex p-2 mr-2 rounded-full justify-center items-center bg-white ">
             <img
@@ -73,9 +73,14 @@ export default {
   components: {},
   data() {
     return {
-      filterMenu: null,
+      filterMenu: false,
     };
   },
+  methods: {
+    toggleFilterMenu() {
+      this.filterMenu = !this.filterMenu;
+    }
+  }
 };
 </script>
 

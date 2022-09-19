@@ -1,45 +1,53 @@
 <template>
    <div>
-      <div v-if="!isMobile" class=" min-h-screen flex flex-col md:flex-row md:min-width-screen ">
-         <Navigation/>
+      <div
+         v-if="!isMobile"
+         class="min-h-screen flex flex-col md:flex-row md:min-width-screen"
+      >
+         <Navigation />
          <div class="flex flex-col px-16 relative flex-1">
+            <InvoiceModal />
             <router-view />
          </div>
       </div>
-      <div v-else class="flex flex-col h-screen justify-center align-middle text-center mx-4">
-         <h2 class="text-2xl font-bold">Unfortunately, this app is not supported on mobile devices</h2>
+      <div
+         v-else
+         class="flex flex-col h-screen justify-center align-middle text-center mx-4"
+      >
+         <h2 class="text-2xl font-bold">
+            Unfortunately, this app is not supported on mobile devices
+         </h2>
          <p class="mt-4 text-1xl">Try to open on computer or tablet</p>
       </div>
    </div>
-      
 </template>
 
 <script>
 import Navigation from "./components/Navigation.vue";
+import InvoiceModal from "./components/InvoiceModal.vue";
 
 export default {
-   components: { Navigation },
+   components: { Navigation, InvoiceModal },
    data() {
       return {
-         isMobile: null
-      }
+         isMobile: null,
+      };
    },
    created() {
-      this.checkMobile()
-      window.addEventListener("resize", this.checkMobile)
+      this.checkMobile();
+      window.addEventListener("resize", this.checkMobile);
    },
    methods: {
-      checkMobile: function() {
-         const screenWidth = window.innerWidth
+      checkMobile: function () {
+         const screenWidth = window.innerWidth;
          if (screenWidth <= 750) {
             this.isMobile = true;
-            return 
+            return;
          }
-         this.isMobile = false
-      }
-   }
+         this.isMobile = false;
+      },
+   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
