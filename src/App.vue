@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="bg-emerald-100">
       <div
          v-if="!isMobile"
          class="min-h-screen flex flex-col md:flex-row md:min-width-screen"

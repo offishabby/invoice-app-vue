@@ -17,6 +17,9 @@ module.exports = {
         xl: "1280px",
         // => @media (min-width: 1280px) { ... }
       },
+      boxShadow: {
+        '3xl': 'rgba(17, 12, 46, 0.15) 0px 48px 100px 0px',
+      }
     },
   },
   plugins: [],
