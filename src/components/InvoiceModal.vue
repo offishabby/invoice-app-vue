@@ -20,7 +20,7 @@
 						>Street Address</label
 					>
 					<input
-						class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+						class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 						required
 						type="text"
 						id="billerStreetAddress"
@@ -35,7 +35,7 @@
 							>City</label
 						>
 						<input
-							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="billerCity"
@@ -49,7 +49,7 @@
 							>Zip Code</label
 						>
 						<input
-							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="billerZipCode"
@@ -63,7 +63,7 @@
 							>Country</label
 						>
 						<input
-							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="billerCountry"
@@ -83,7 +83,7 @@
 						>Client's Name</label
 					>
 					<input
-						class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+						class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 						required
 						type="text"
 						id="clientName"
@@ -97,7 +97,7 @@
 						>Client's Email</label
 					>
 					<input
-						class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+						class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 						required
 						type="text"
 						id="clientEmail"
@@ -111,7 +111,7 @@
 						>Street Address</label
 					>
 					<input
-						class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+						class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 						required
 						type="text"
 						id="clientStreetAddress"
@@ -126,7 +126,7 @@
 							>City</label
 						>
 						<input
-							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="clientCity"
@@ -140,7 +140,7 @@
 							>Zip Code</label
 						>
 						<input
-							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="clientZipCode"
@@ -154,7 +154,7 @@
 							>Country</label
 						>
 						<input
-							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="clientCountry"
@@ -174,7 +174,7 @@
 							>Invoice Date</label
 						>
 						<input
-							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 							disabled
 							type="text"
 							id="invoiceDate"
@@ -188,7 +188,7 @@
 							>Payment Due</label
 						>
 						<input
-							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none rounded text-slate-800 px-3 py-1"
 							disabled
 							type="text"
 							id="paymentDueDateUnix"
@@ -203,7 +203,7 @@
 						>Payment Terms</label
 					>
 					<select
-						class="mb-5 border-neutral-400 border-b-2 outline-none roundedext-slate-800 py-1.5 px-3"
+						class="mb-5 border-neutral-400 border-b-2 outline-none rounded text-slate-800 py-1.5 px-3"
 						type="text"
 						id="paymentTerms"
 						v-model="paymentTerms"
@@ -228,50 +228,105 @@
 				</div>
 				<div class="work-items">
 					<h3 class="mb-4 text-lg">Items List</h3>
-					<table class="items-list w-full">
-						<tr class="table-heading mb-4 flex gap-[16px] text-sm">
-							<th class="text-left item-name basis-1/2">Item Name</th>
-							<th class="text-left qty basis-1/10">Qty</th>
-							<th class="text-left price basis-1/5">Price</th>
-							<th class="text-left total basis-1/5">Total</th>
-						</tr>
-						<tr
-							class="table-items gap-[16px] text-sm flex relative mb-6"
+
+					<!-- my container for items -->
+					<div class="flex flex-col">
+						<div class="flex text-sm mb-2">
+							<div class="text-left font-bold item-name basis-[50%]">Item Name</div>
+							<div class="text-left font-bold qty basis-[10%]">Qty</div>
+							<div class="text-left font-bold price basis-[15%]">Price</div>
+							<div class="text-left font-bold total basis-[15%]">Total</div>
+						</div>
+						<div
+							class="flex text-sm relative mb-3"
 							v-for="(item, index) in invoiceItemList"
 							:key="index"
 						>
-							<td class="item-name basis-1/2">
+							<div class="item-name basis-[50%] pr-1.5">
 								<input
-									class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+									class=" w-full border-neutral-400 border-b-2 outline-none text-slate-800 px-1.5 py-1"
+									type="text"
+									v-model="item.itemName"
+								/>
+							</div>
+							<div class="basis-[10%] pr-1.5">
+								<input
+									class=" w-full border-neutral-400 border-b-2 outline-none text-slate-800 px-1.5 py-1"
+									type="text"
+									v-model="item.qty"
+								/>
+							</div>
+							<div class="basis-[15%] pr-1.5">
+								<input
+									class=" w-full border-neutral-400 border-b-2 outline-none text-slate-800 px-1.5 py-1"
+									type="text"
+									v-model="item.price"
+								/>
+							</div>
+							<div class="total basis-[15%] flex items-center pr-1.5 overflow-x-auto">
+								 <span class="mr-0.5">$</span>
+								  {{ (item.total = item.qty * item.price) }} 
+							</div>
+							<div class="total basis-[10%] flex items-center justify-center">
+								<img
+								@click="deleteInvoiceItem(item.id)"
+								class="w-3 h-4 "
+								src="../assets/icon-delete.svg"
+								alt="delete"
+							/>
+							</div >
+							
+						</div>
+					</div>
+
+					<!-- table class="items-list w-full">
+						<tr class="table-heading mb-4 flex gap-[16px] text-sm">
+							<th class="text-left item-name basis-1/2">Item Name</th>
+							<th class="text-left qty basis-1/10">Qty</th>
+							<th class="text-left price basis-1/10">Price</th>
+							<th class="text-left total basis-1/5">Total</th>
+						</tr>
+						<tr
+							class="table-items gap-[16px] text-sm flex relative mb-3"
+							v-for="(item, index) in invoiceItemList"
+							:key="index"
+						>
+							<td class="item-name basis-5/10 center">
+								<input
+									class="mb-6 w-full border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 									type="text"
 									v-model="item.itemName"
 								/>
 							</td>
 							<td class="qty basis-1/10">
 								<input
-									class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+									class="mb-6 w-full border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 									type="text"
 									v-model="item.qty"
 								/>
 							</td>
-							<td class="price basis-1/5">
+							<td class="price basis-2/10">
 								<input
-									class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
+									class="mb-6 w-full border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 									type="text"
 									v-model="item.price"
 								/>
 							</td>
-							<td class="total basis-1/5 flex">
+							<td class="total basis-1/10 flex">
 								$ {{ (item.total = item.qty * item.price) }}
 							</td>
-							<img
+							<td class="total basis-1/5 flex">
+								<img
 								@click="deleteInvoiceItem(item.id)"
 								class="absolute top-[15px] w-3 h-4"
 								src="../assets/icon-delete.svg"
 								alt="delete"
 							/>
+							</td >
+							
 						</tr>
-					</table>
+					</table> -->
+
 					<div
 						@click="addNewInvoiceItem"
 						class="flex button align-middle justify-center p-2 rounded bg-sky-600 hover:bg-sky-700 text-zinc-200 duration-500 my-4"
@@ -317,6 +372,7 @@
 
 <script>
 import { mapMutations } from "vuex";
+import {uid} from 'uid'
 export default {
 	name: "InvoiceModal",
 
@@ -361,6 +417,17 @@ export default {
 		closeInvoice() {
 			this.TOGGLE_INVOICE();
 		},
+		addNewInvoiceItem() {
+			this.invoiceItemList.push({
+				id: uid(),
+				itemName: "",
+				qty: "",
+				price: 0
+			})
+		},
+		deleteInvoiceItem(id) {
+			this.invoiceItemList = this.invoiceItemList.filter(item => item.id !== id)
+		}
 	},
 	watch: {
 		paymentTerms() {
