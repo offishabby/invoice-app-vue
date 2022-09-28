@@ -2,17 +2,17 @@
 	<div
 		@click="checkClick"
 		ref="invoiceWrap"
-		class="invoice-wrap z-10 fixed top-[64px] bg-transparent w-full left-0 md:top-0 md:left-[64px] h-screen overflow-auto flex flex-col md:pb-0 pb-14 "
+		class="invoice-wrap z-10 fixed top-[64px] bg-transparent w-full left-0 md:top-0 md:left-[64px] h-screen overflow-auto flex flex-col md:pb-0 pb-14"
 	>
 		<form
 			@submit.prevent="submitForm"
-			class="invoice-content text-white shadow-2xl bg-green-500 relative p-14 max-w-2xl w-full"
+			class="invoice-content text-white text-neutral-600 shadow-2xl bg-neutral-300 relative p-14 max-w-2xl w-full"
 		>
-			<h1 class="mb-12 text-white text-3xl font-bold">New Invoice</h1>
+			<h1 class="mb-12 text-3xl font-bold">New Invoice</h1>
 
 			<!-- Bill From -->
 			<div class="bill-from flex flex-col">
-				<h4 class="mb-6 text-slate-100 text-sm">Bill From</h4>
+				<h4 class="underline mb-6 text-sm">Bill From</h4>
 				<div class="input flex flex-col">
 					<label
 						class="mb-1.5 text-sm"
@@ -20,7 +20,7 @@
 						>Street Address</label
 					>
 					<input
-						class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+						class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 						required
 						type="text"
 						id="billerStreetAddress"
@@ -35,7 +35,7 @@
 							>City</label
 						>
 						<input
-							class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="billerCity"
@@ -49,7 +49,7 @@
 							>Zip Code</label
 						>
 						<input
-							class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="billerZipCode"
@@ -63,7 +63,7 @@
 							>Country</label
 						>
 						<input
-							class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="billerCountry"
@@ -75,7 +75,7 @@
 
 			<!-- Bill To -->
 			<div class="bill-from flex flex-col">
-				<h4 class="my-6 text-slate-100 text-sm">Bill To</h4>
+				<h4 class="my-6 underline text-sm">Bill To</h4>
 				<div class="input flex flex-col">
 					<label
 						class="mb-1.5 text-sm"
@@ -83,7 +83,7 @@
 						>Client's Name</label
 					>
 					<input
-						class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+						class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 						required
 						type="text"
 						id="clientName"
@@ -97,7 +97,7 @@
 						>Client's Email</label
 					>
 					<input
-						class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+						class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 						required
 						type="text"
 						id="clientEmail"
@@ -111,7 +111,7 @@
 						>Street Address</label
 					>
 					<input
-						class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+						class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 						required
 						type="text"
 						id="clientStreetAddress"
@@ -126,7 +126,7 @@
 							>City</label
 						>
 						<input
-							class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="clientCity"
@@ -140,7 +140,7 @@
 							>Zip Code</label
 						>
 						<input
-							class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="clientZipCode"
@@ -154,7 +154,7 @@
 							>Country</label
 						>
 						<input
-							class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 							required
 							type="text"
 							id="clientCountry"
@@ -174,7 +174,7 @@
 							>Invoice Date</label
 						>
 						<input
-							class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 							disabled
 							type="text"
 							id="invoiceDate"
@@ -188,11 +188,11 @@
 							>Payment Due</label
 						>
 						<input
-							class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+							class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 							disabled
 							type="text"
 							id="paymentDueDateUnix"
-							v-model="paymentDueDateUnix"
+							v-model="paymentDueDate"
 						/>
 					</div>
 				</div>
@@ -203,8 +203,7 @@
 						>Payment Terms</label
 					>
 					<select
-						class="mb-5 border-none rounded-sm text-slate-800 py-1"
-						disabled
+						class="mb-5 border-neutral-400 border-b-2 outline-none roundedext-slate-800 py-1.5 px-3"
 						type="text"
 						id="paymentTerms"
 						v-model="paymentTerms"
@@ -220,7 +219,7 @@
 						>Product Description</label
 					>
 					<input
-						class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+						class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 						disabled
 						type="text"
 						id="productDescription"
@@ -228,7 +227,7 @@
 					/>
 				</div>
 				<div class="work-items">
-					<h3 class="mb-4 text-lg text-slate-100">Items List</h3>
+					<h3 class="mb-4 text-lg">Items List</h3>
 					<table class="items-list w-full">
 						<tr class="table-heading mb-4 flex gap-[16px] text-sm">
 							<th class="text-left item-name basis-1/2">Item Name</th>
@@ -243,30 +242,29 @@
 						>
 							<td class="item-name basis-1/2">
 								<input
-									class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+									class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 									type="text"
 									v-model="item.itemName"
 								/>
 							</td>
 							<td class="qty basis-1/10">
 								<input
-									class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+									class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 									type="text"
 									v-model="item.qty"
 								/>
 							</td>
 							<td class="price basis-1/5">
 								<input
-									class="mb-6 border-none rounded-sm text-slate-800 px-3 py-1"
+									class="mb-6 border-neutral-400 border-b-2 outline-none roundedext-slate-800 px-3 py-1"
 									type="text"
 									v-model="item.price"
 								/>
 							</td>
-							<td class="total basis-1/5 flex ">
+							<td class="total basis-1/5 flex">
 								$ {{ (item.total = item.qty * item.price) }}
 							</td>
 							<img
-
 								@click="deleteInvoiceItem(item.id)"
 								class="absolute top-[15px] w-3 h-4"
 								src="../assets/icon-delete.svg"
@@ -276,7 +274,7 @@
 					</table>
 					<div
 						@click="addNewInvoiceItem"
-						class="flex button align-middle justify-center p-2 rounded-full bg-purple-500 text-zinc-200 hover:bg-purple-600 duration-500 my-4"
+						class="flex button align-middle justify-center p-2 rounded bg-sky-600 hover:bg-sky-700 text-zinc-200 duration-500 my-4"
 					>
 						<!-- <img
 							class="h-[20px] w-auto self-center mr-1"
@@ -289,11 +287,11 @@
 			</div>
 
 			<!-- Save/Exit -->
-			<div class="save flex justify-between">
+			<div class="save flex justify-between text-white">
 				<div class="right flex">
 					<button
 						@click="closeInvoice"
-						class="p-2 rounded-full bg-red-400 hover:bg-red-500 duration-500"
+						class="py-2 px-3 rounded bg-red-500 hover:bg-red-600 duration-500"
 					>
 						Cancel
 					</button>
@@ -301,13 +299,13 @@
 				<div class="left gap-4 flex">
 					<button
 						@click="saveDraft"
-						class="p-2 rounded-full bg-purple-400 hover:bg-purple-500 duration-500"
+						class="p-2 rounded bg-sky-600 hover:bg-sky-700 duration-500"
 					>
 						Save Draft
 					</button>
 					<button
 						@click="publishInvoice"
-						class="px-3 py-2 rounded-full bg-purple-600 hover:bg-purple-700 duration-500"
+						class="px-3 py-2 rounded bg-sky-600 hover:bg-sky-700 duration-500"
 					>
 						Create Invoice
 					</button>
@@ -318,6 +316,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
 	name: "InvoiceModal",
 
@@ -343,9 +342,39 @@ export default {
 			invoiceDraft: null,
 			invoiceItemList: [],
 			invoiceTotal: 0,
+			dateOptions: {
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+			},
 		};
+	},
+	created() {
+		this.invoiceDateUnix = Date.now();
+		this.invoiceDate = new Date(this.invoiceDateUnix).toLocaleDateString(
+			"en",
+			this.dateOptions
+		);
+	},
+	methods: {
+		...mapMutations(["TOGGLE_INVOICE"]),
+		closeInvoice() {
+			this.TOGGLE_INVOICE();
+		},
+	},
+	watch: {
+		paymentTerms() {
+			let futureDate = new Date();
+			this.paymentDueDateUnix = futureDate.setDate(
+				futureDate.getDate() + +this.paymentTerms
+			);
+
+			this.paymentDueDate = new Date(
+				this.paymentDueDateUnix
+			).toLocaleDateString("en-us", this.dateOptions);
+		},
 	},
 };
 </script>
 
-<style lang="css" scoped></style>text-left 
+<style lang="css" scoped></style>

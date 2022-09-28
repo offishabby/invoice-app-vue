@@ -1,12 +1,14 @@
 <template>
-   <div class="bg-emerald-100">
+   <div class="bg-neutral-100">
       <div
          v-if="!isMobile"
          class="min-h-screen flex flex-col md:flex-row md:min-width-screen"
       >
          <Navigation />
          <div class="flex flex-col px-16 relative flex-1">
-            <InvoiceModal />
+            <Transition name="invoice">
+               <InvoiceModal v-if="this.invoiceModal" />
+            </Transition>
             <router-view />
          </div>
       </div>
@@ -25,6 +27,8 @@
 <script>
 import Navigation from "./components/Navigation.vue";
 import InvoiceModal from "./components/InvoiceModal.vue";
+
+import { mapState } from "vuex";
 
 export default {
    components: { Navigation, InvoiceModal },
@@ -47,7 +51,21 @@ export default {
          this.isMobile = false;
       },
    },
+   computed: {
+      ...mapState(["invoiceModal"]),
+   },
 };
 </script>
 
-<style></style>
+<style>
+/* classes for animation */
+.invoice-enter-active,
+.invoice-leave-active {
+   transition: opacity 0.5s ease;
+}
+
+.invoice-enter-from,
+.invoice-leave-to {
+   opacity: 0;
+}
+</style>

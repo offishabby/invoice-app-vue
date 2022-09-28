@@ -1,5 +1,5 @@
 <template>
-  <div class="home font-normal max-w-xl mx-auto text-slate-700">
+  <div class="home font-normal max-w-xl mx-auto text-neutral-600">
     <div class="header my-12 flex justify-center">
       <div class="flex flex-col flex-1">
         <h1 class="text-2xl font-bold">Invoices</h1>
@@ -45,9 +45,9 @@
         </div>
         <div
           @click="newInvoice"
-          class="flex flex-1 items-center rounded-full bg-emerald-400 px-3 py-2  text-sm"
+          class="flex flex-1 text-white items-center rounded hover:bg-neutral-600 duration-300 bg-neutral-500 px-3 py-2  text-sm"
         >
-          <div class="flex p-2 mr-2 rounded-full justify-center items-center bg-white ">
+          <div class="flex p-2 mr-2 rounded justify-center items-center bg-white ">
             <img
               src="../assets/icon-plus.svg"
               alt=""
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
   name: "Home",
   components: {},
@@ -77,6 +78,12 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['TOGGLE_INVOICE']),
+
+    newInvoice() {
+      this.TOGGLE_INVOICE()
+    },
+
     toggleFilterMenu() {
       this.filterMenu = !this.filterMenu;
     }
