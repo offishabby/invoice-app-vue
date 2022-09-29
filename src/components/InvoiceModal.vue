@@ -232,10 +232,16 @@
 					<!-- my container for items -->
 					<div class="flex flex-col">
 						<div class="flex text-sm mb-2">
-							<div class="text-left font-bold item-name basis-[50%]">Item Name</div>
+							<div class="text-left font-bold item-name basis-[50%]">
+								Item Name
+							</div>
 							<div class="text-left font-bold qty basis-[10%]">Qty</div>
-							<div class="text-left font-bold price basis-[15%]">Price</div>
-							<div class="text-left font-bold total basis-[15%]">Total</div>
+							<div class="text-left font-bold price basis-[15%]">
+								Price
+							</div>
+							<div class="text-left font-bold total basis-[15%]">
+								Total
+							</div>
 						</div>
 						<div
 							class="flex text-sm relative mb-3"
@@ -244,38 +250,41 @@
 						>
 							<div class="item-name basis-[50%] pr-1.5">
 								<input
-									class=" w-full border-neutral-400 border-b-2 outline-none text-slate-800 px-1.5 py-1"
+									class="w-full border-neutral-400 border-b-2 outline-none text-slate-800 px-1.5 py-1"
 									type="text"
 									v-model="item.itemName"
 								/>
 							</div>
 							<div class="basis-[10%] pr-1.5">
 								<input
-									class=" w-full border-neutral-400 border-b-2 outline-none text-slate-800 px-1.5 py-1"
+									class="w-full border-neutral-400 border-b-2 outline-none text-slate-800 px-1.5 py-1"
 									type="text"
 									v-model="item.qty"
 								/>
 							</div>
 							<div class="basis-[15%] pr-1.5">
 								<input
-									class=" w-full border-neutral-400 border-b-2 outline-none text-slate-800 px-1.5 py-1"
+									class="w-full border-neutral-400 border-b-2 outline-none text-slate-800 px-1.5 py-1"
 									type="text"
 									v-model="item.price"
 								/>
 							</div>
-							<div class="total basis-[15%] flex items-center pr-1.5 overflow-x-auto">
-								 <span class="mr-0.5">$</span>
-								  {{ (item.total = item.qty * item.price) }} 
+							<div
+								class="total basis-[15%] flex items-center pr-1.5 overflow-x-auto"
+							>
+								<span class="mr-0.5">$</span>
+								{{ (item.total = item.qty * item.price) }}
 							</div>
-							<div class="total basis-[10%] flex items-center justify-center">
+							<div
+								class="total basis-[10%] flex items-center justify-center"
+							>
 								<img
-								@click="deleteInvoiceItem(item.id)"
-								class="w-3 h-4 "
-								src="../assets/icon-delete.svg"
-								alt="delete"
-							/>
-							</div >
-							
+									@click="deleteInvoiceItem(item.id)"
+									class="w-3 h-4"
+									src="../assets/icon-delete.svg"
+									alt="delete"
+								/>
+							</div>
 						</div>
 					</div>
 
@@ -371,8 +380,9 @@
 </template>
 
 <script>
+import firebaseDB from "../firebase/firebaseinit";
 import { mapMutations } from "vuex";
-import {uid} from 'uid'
+import { uid } from "uid";
 export default {
 	name: "InvoiceModal",
 
@@ -414,20 +424,81 @@ export default {
 	},
 	methods: {
 		...mapMutations(["TOGGLE_INVOICE"]),
+
 		closeInvoice() {
 			this.TOGGLE_INVOICE();
 		},
+
 		addNewInvoiceItem() {
 			this.invoiceItemList.push({
 				id: uid(),
 				itemName: "",
 				qty: "",
-				price: 0
-			})
+				price: 0,
+			});
 		},
+
 		deleteInvoiceItem(id) {
-			this.invoiceItemList = this.invoiceItemList.filter(item => item.id !== id)
-		}
+			this.invoiceItemList = this.invoiceItemList.filter(
+				(item) => item.id !== id
+			);
+		},
+
+		calculateInvoiceTotal() {
+			this.invoiceTotal = 0;
+			this.invoiceItemList.forEach((item) => {
+				this.invoiceTotal += item.total;
+			});
+		},
+
+		publishInvoice() {
+			this.invoicePending = true;
+		},
+
+		saveDraft() {
+			this.invoiceDraft = true;
+		},
+
+		async uploadInvoice() {
+			if (this.invoiceItemList.length <= 0) {
+				alert("Please fill up the work items!");
+				return;
+			}
+
+			this.calculateInvoiceTotal();
+
+			const dataBase = firebaseDB.collection("invoice").doc();
+
+			await dataBase.set({
+				invoiceId: uid(6),
+				billerStreetAddress: this.billerStreetAddress,
+				billerCity: this.billerCity,
+				billerZipCode: this.billerZipCode,
+				billerCountry: this.billerCountry,
+				clientName: this.clientName,
+				clientEmail: this.clientEmail,
+				clientStreetAddress: this.clientStreetAddress,
+				clientCity: this.clientCity,
+				clientZipCode: this.clientZipCode,
+				clientCountry: this.clientCountry,
+				invoiceDateUnix: this.invoiceDateUnix,
+				invoiceDate: this.invoiceDate,
+				paymentTerms: this.paymentTerms,
+				paymentDueDateUnix: this.paymentDueDateUnix,
+				paymentDueDate: this.paymentDueDate,
+				productDescription: this.productDescription,
+				invoicePending: this.invoicePending,
+				invoiceDraft: this.invoiceDraft,
+				invoiceItemList: this.invoiceItemList,
+				invoiceTotal: this.invoiceTotal,
+			});
+
+			this.TOGGLE_INVOICE();
+		},
+
+		submitForm() {
+			this.uploadInvoice();
+		},
 	},
 	watch: {
 		paymentTerms() {
