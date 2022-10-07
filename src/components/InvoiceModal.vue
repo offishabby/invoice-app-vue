@@ -309,20 +309,23 @@
 			<div class="flex justify-between text-white save">
 				<div class="flex right">
 					<button
+						type="button"
 						@click="closeInvoice"
-						class="px-3 py-2 bg-red-400 rounded hover:bg-red-500 duration-300"
+						class="px-3 py-2 bg-red-400 rounded hover:bg-red-500 duration-500"
 					>
 						Cancel
 					</button>
 				</div>
 				<div class="flex left gap-4">
 					<button
+						type="submit"
 						@click="saveDraft"
 						class="p-2 rounded bg-sky-600 hover:bg-sky-700 duration-500"
 					>
 						Save Draft
 					</button>
 					<button
+						type="submit"
 						@click="publishInvoice"
 						class="px-3 py-2 rounded bg-sky-600 hover:bg-sky-700 duration-500"
 					>
@@ -384,7 +387,13 @@ export default {
 		);
 	},
 	methods: {
-		...mapMutations(["TOGGLE_INVOICE"]),
+		...mapMutations(["TOGGLE_INVOICE", "TOGGLE_MODAL"]),
+
+		checkClick(event) {
+			if (event.target === this.$refs.invoiceWrap) {
+				this.TOGGLE_MODAL()
+			}
+		},
 
 		closeInvoice() {
 			this.TOGGLE_INVOICE();

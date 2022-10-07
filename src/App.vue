@@ -1,11 +1,14 @@
 <template>
-   <div class="bg-neutral-100">
+   <!-- <div class="bg-red-200 h-screen" v-if="!invoicesLoaded" ></div> -->
+   <!-- <Loading v-if="!invoicesLoaded" ></Loading> -->
+   <div  class="bg-neutral-100">
       <div
          v-if="!isMobile"
          class="min-h-screen flex flex-col md:flex-row md:min-width-screen"
       >
          <Navigation />
          <div class="flex flex-col px-16 relative flex-1">
+            <Modal v-if="modalActive" />
             <Transition name="invoice">
                <InvoiceModal v-if="this.invoiceModal" />
             </Transition>
@@ -26,22 +29,27 @@
 
 <script>
 import Navigation from "./components/Navigation.vue";
+import Loading from "./components/Loading.vue";
 import InvoiceModal from "./components/InvoiceModal.vue";
-
-import { mapState } from "vuex";
+import Modal from "./components/Modal.vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
-   components: { Navigation, InvoiceModal },
+   components: { Navigation, InvoiceModal, Modal, Loading },
    data() {
       return {
          isMobile: null,
       };
    },
    created() {
+      this.GET_INVOICES()
       this.checkMobile();
       window.addEventListener("resize", this.checkMobile);
    },
    methods: {
+
+      ...mapActions(["GET_INVOICES"]),
+
       checkMobile: function () {
          const screenWidth = window.innerWidth;
          if (screenWidth <= 750) {
@@ -52,7 +60,7 @@ export default {
       },
    },
    computed: {
-      ...mapState(["invoiceModal"]),
+      ...mapState(["invoiceModal", "modalActive", "invoicesLoaded"]),
    },
 };
 </script>
