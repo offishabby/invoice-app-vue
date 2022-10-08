@@ -1,5 +1,5 @@
 <template>
-  <div class="home font-normal max-w-xl mx-auto text-neutral-600">
+  <div class="home font-normal w-3/5 mx-auto text-neutral-600">
     <div class="header my-12 flex justify-center">
       <div class="flex flex-col flex-1">
         <h1 class="text-2xl font-bold">Invoices</h1>
@@ -58,20 +58,16 @@
         </div>
       </div>
     </div>
-    <div>
-      //// test text <br />
-      Lorem ipsum dolor sit, amet, consectetur adipisicing elit. Aliquid ut
-      ipsam consequuntur iste quam amet magnam consequatur ad sapiente illum cum
-      culpa quo, voluptas vel numquam fuga recusandae omnis adipisci?
-    </div>
+   <Invoice v-for="(invoice, idx) in invoiceData" :invoice="invoice" :key="idx" />
   </div>
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import Invoice from "../components/Invoice.vue"
+import {mapMutations, mapState} from 'vuex'
 export default {
   name: "Home",
-  components: {},
+  components: {Invoice},
   data() {
     return {
       filterMenu: false,
@@ -87,6 +83,9 @@ export default {
     toggleFilterMenu() {
       this.filterMenu = !this.filterMenu;
     }
+  },
+  computed: {
+    ...mapState(['invoiceData'])
   }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
    <!-- <div class="bg-red-200 h-screen" v-if="!invoicesLoaded" ></div> -->
-   <!-- <Loading v-if="!invoicesLoaded" ></Loading> -->
-   <div  class="bg-neutral-100">
+   <Loading v-if="!invoicesLoaded" ></Loading>
+   <div v-else class="bg-neutral-100">
       <div
          v-if="!isMobile"
          class="min-h-screen flex flex-col md:flex-row md:min-width-screen"

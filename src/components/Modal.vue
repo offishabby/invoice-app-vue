@@ -1,5 +1,3 @@
-
-
 <template>
 	<div class="modal z-30 flex items-center h-screen w-full fixed justify-center">
 		<div class="modal-content rounded py-12 px-8 bg-neutral-500 text-white w-[350px]">
