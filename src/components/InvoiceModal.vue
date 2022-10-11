@@ -293,7 +293,7 @@
 
 					<div
 						@click="addNewInvoiceItem"
-						class="flex justify-center p-2 my-4 align-middle rounded button bg-sky-600 hover:bg-sky-700 text-zinc-200 duration-500"
+						class="flex justify-center p-2 my-4 align-middle text-white rounded opacity-80 hover:opacity-100 bg-blue-500 duration-300"
 					>
 						<!-- <img
 							class="h-[20px] w-auto self-center mr-1"
@@ -320,14 +320,14 @@
 					<button
 						type="submit"
 						@click="saveDraft"
-						class="p-2 rounded bg-sky-600 hover:bg-sky-700 duration-500"
+						class="p-2 rounded opacity-80 hover:opacity-100 bg-blue-500 duration-300"
 					>
 						Save Draft
 					</button>
 					<button
 						type="submit"
 						@click="publishInvoice"
-						class="px-3 py-2 rounded bg-sky-600 hover:bg-sky-700 duration-500"
+						class="px-3 py-2 rounded opacity-80 hover:opacity-100 bg-blue-500 duration-300"
 					>
 						Create Invoice
 					</button>
@@ -373,7 +373,7 @@ export default {
 			invoiceTotal: 0,
 			dateOptions: {
 				year: "numeric",
-				month: "long",
+				month: "short",
 				day: "numeric",
 			},
 			loading: false,
