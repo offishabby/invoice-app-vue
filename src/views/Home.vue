@@ -1,5 +1,5 @@
 <template>
-  <div class="home font-normal w-[70%] mx-auto text-neutral-600">
+  <div class="home font-normal max-w-[1000px] w-[70%] mx-auto text-neutral-600">
     <!-- header -->
     <div class="header my-12 flex justify-center">
       <div class="flex flex-col flex-1">
