@@ -33,7 +33,7 @@
       </div>
       <div class="right flex flex-1 justify-end">
         <button
-          @click="toggleEditInvoice(currentInvoice.docId)"
+          @click="toggleEditInvoice"
           class="min-w-[70px] bg-blue-500 ml-4 rounded opacity-80 hover:opacity-100 duration-300 text-white p-2 shadow-md"
         >
           Edit
@@ -152,11 +152,16 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["SET_CURRENT_INVOICE"]),
+    ...mapMutations(["SET_CURRENT_INVOICE", "TOGGLE_INVOICE", "SET_EDIT_INVOICE"]),
 
     getCurrnetInvoice() {
       this.SET_CURRENT_INVOICE(this.$route.params.invoiceId);
     },
+
+    toggleEditInvoice() {
+      this.SET_EDIT_INVOICE(true)
+      this.TOGGLE_INVOICE()
+    }
   },
 
   computed: {

@@ -9,7 +9,18 @@
 			class="relative w-full max-w-2xl shadow-2xl invoice-content text-neutral-600 bg-neutral-300 p-14"
 		>
 			<Loading v-show="loading" />
-			<h1 class="mb-12 text-3xl font-bold">New Invoice</h1>
+			<h1
+				v-if="!editInvoice"
+				class="mb-12 text-3xl font-bold"
+			>
+				New Invoice
+			</h1>
+			<h1
+				v-else
+				class="mb-12 text-3xl font-bold"
+			>
+				Edit Invoice
+			</h1>
 
 			<!-- Bill From -->
 			<div class="flex flex-col bill-from">
@@ -318,6 +329,7 @@
 				</div>
 				<div class="flex left gap-4">
 					<button
+						v-if="!editInvoice"
 						type="submit"
 						@click="saveDraft"
 						class="p-2 rounded opacity-80 hover:opacity-100 bg-blue-500 duration-300"
@@ -325,11 +337,20 @@
 						Save Draft
 					</button>
 					<button
+						v-if="!editInvoice"
 						type="submit"
 						@click="publishInvoice"
 						class="px-3 py-2 rounded opacity-80 hover:opacity-100 bg-blue-500 duration-300"
 					>
 						Create Invoice
+					</button>
+					<button
+						v-if="editInvoice"
+						type="submit"
+						@click="updateInvoice"
+						class="px-3 py-2 rounded opacity-80 hover:opacity-100 bg-blue-500 duration-300"
+					>
+						Update Invoice
 					</button>
 				</div>
 			</div>
@@ -340,7 +361,7 @@
 <script>
 import Loading from "./Loading.vue";
 import firebaseDB from "../firebase/firebaseinit";
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 import { uid } from "uid";
 export default {
 	name: "InvoiceModal",
@@ -380,18 +401,44 @@ export default {
 		};
 	},
 	created() {
-		this.invoiceDateUnix = Date.now();
-		this.invoiceDate = new Date(this.invoiceDateUnix).toLocaleDateString(
-			"en",
-			this.dateOptions
-		);
+		if (!this.editInvoice) {
+			this.invoiceDateUnix = Date.now();
+			this.invoiceDate = new Date(this.invoiceDateUnix).toLocaleDateString(
+				"en",
+				this.dateOptions
+			);
+		} else {
+			// this.docId = this.currentInvoice.doc.id,
+         this.invoiceId = this.currentInvoice.invoiceId
+         this.billerStreetAddress = this.currentInvoice.billerStreetAddress
+         this.billerCity = this.currentInvoice.billerCity
+         this.billerZipCode = this.currentInvoice.billerZipCode
+         this.billerCountry = this.currentInvoice.billerCountry
+         this.clientName = this.currentInvoice.clientName
+         this.clientEmail = this.currentInvoice.clientEmail
+         this.clientStreetAddress = this.currentInvoice.clientStreetAddress
+         this.clientCity = this.currentInvoice.clientCity
+         this.clientZipCode = this.currentInvoice.clientZipCode
+         this.clientCountry = this.currentInvoice.clientCountry
+         this.invoiceDateUnix = this.currentInvoice.invoiceDateUnix
+         this.invoiceDate = this.currentInvoice.invoiceDate
+         this.paymentTerms = this.currentInvoice.paymentTerms
+         this.paymentDueDateUnix = this.currentInvoice.paymentDueDateUnix
+         this.paymentDueDate = this.currentInvoice.paymentDueDate
+         this.productDescription = this.currentInvoice.productDescription
+         this.invoiceItemList = this.currentInvoice.invoiceItemList
+         this.invoiceTotal = this.currentInvoice.invoiceTotal
+         this.invoicePending = this.currentInvoice.invoicePending
+         this.invoiceDraft = this.currentInvoice.invoiceDraft
+         this.invoicePaid = this.currentInvoice.invoicePaid
+		}
 	},
 	methods: {
 		...mapMutations(["TOGGLE_INVOICE", "TOGGLE_MODAL"]),
 
 		checkClick(event) {
 			if (event.target === this.$refs.invoiceWrap) {
-				this.TOGGLE_MODAL()
+				this.TOGGLE_MODAL();
 			}
 		},
 
@@ -473,6 +520,9 @@ export default {
 		submitForm() {
 			this.uploadInvoice();
 		},
+	},
+	computed: {
+		...mapState(["editInvoice", "currentInvoice"]),
 	},
 	watch: {
 		paymentTerms() {

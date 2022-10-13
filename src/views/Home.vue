@@ -1,5 +1,5 @@
 <template>
-  <div class="home font-normal max-w-[1000px] w-[70%] mx-auto text-neutral-600">
+  <div class="home font-normal max-w-[1000px] w-[80%] mx-auto text-neutral-600">
     <!-- header -->
     <div class="header my-12 flex justify-center">
       <div class="flex flex-col flex-1">
@@ -20,25 +20,25 @@
           />
           <ul
             v-show="filterMenu"
-            class="filter-menu absolute w-30 top-10 list-none shadow-md bg-emerald-300"
+            class="filter-menu absolute w-30 top-10 list-none shadow-md bg-neutral-300"
           >
             <li
-              class="text-sm py-1 hover:bg-emerald-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-neutral-100 duration-300 px-2 cursor-pointer"
             >
               Draft
             </li>
             <li
-              class="text-sm py-1 hover:bg-emerald-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-neutral-100 duration-300 px-2 cursor-pointer"
             >
               Pending
             </li>
             <li
-              class="text-sm py-1 hover:bg-emerald-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-neutral-100 duration-300 px-2 cursor-pointer"
             >
               Paid
             </li>
             <li
-              class="text-sm py-1 hover:bg-emerald-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-neutral-100 duration-300 px-2 cursor-pointer"
             >
               Clear filter
             </li>
@@ -90,9 +90,10 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["TOGGLE_INVOICE"]),
+    ...mapMutations(["TOGGLE_INVOICE", "SET_EDIT_INVOICE"]),
 
     newInvoice() {
+      this.SET_EDIT_INVOICE(false)
       this.TOGGLE_INVOICE();
     },
 
