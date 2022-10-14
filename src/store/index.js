@@ -19,7 +19,6 @@ export default createStore({
     },
     SET_INVOICE_DATA(state, payload) {
       state.invoiceData.push(payload);
-      // console.log(state.invoiceData);
     },
     INVOICES_LOADED(state) {
       state.invoicesLoaded = true
@@ -32,9 +31,6 @@ export default createStore({
     SET_EDIT_INVOICE(state, payload) {
       state.editInvoice = payload
     },
-    // TOGGLE_EDIT_INVOICE(state) {
-    //   state.editInvoice = !state.editInvoice;
-    // },
     DELETE_INVOICE(state, payload) {
       state.invoiceData = state.invoiceData.filter((invoice) => invoice.docId !== payload);
     },
@@ -79,9 +75,13 @@ export default createStore({
       commit("DELETE_INVOICE", docId);
       await dispatch("GET_INVOICES");
       commit("TOGGLE_INVOICE");
-      // commit("TOGGLE_EDIT_INVOICE");
       commit("SET_CURRENT_INVOICE", routeId);
     },
+    async DELETE_INVOICE({commit}, docId) {
+      const invoice = db.collection("invoices").doc(docId)
+      await invoice.delete()
+      commit("DELETE_INVOICE", docId)
+    }
   },
   modules: {},
 });

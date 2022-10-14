@@ -138,7 +138,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 
 export default {
   name: "invoiceView",
@@ -148,19 +148,25 @@ export default {
   },
 
   created() {
-    this.getCurrnetInvoice();
+    this.getCurrentInvoice();
   },
 
   methods: {
     ...mapMutations(["SET_CURRENT_INVOICE", "TOGGLE_INVOICE", "SET_EDIT_INVOICE"]),
+    ...mapActions(["DELETE_INVOICE"]),
 
-    getCurrnetInvoice() {
+    getCurrentInvoice() {
       this.SET_CURRENT_INVOICE(this.$route.params.invoiceId);
     },
 
     toggleEditInvoice() {
       this.SET_EDIT_INVOICE(true)
       this.TOGGLE_INVOICE()
+    },
+
+    async deleteInvoice(docId) {
+      await this.DELETE_INVOICE(docId)
+      this.$router.push({name: 'Home'})
     }
   },
 

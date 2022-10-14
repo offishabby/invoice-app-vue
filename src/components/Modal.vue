@@ -24,7 +24,7 @@
 
 <script>
 
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
 	name: "Modal",
@@ -45,7 +45,6 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(["editInvoice"])
 	}
 };
 </script>
