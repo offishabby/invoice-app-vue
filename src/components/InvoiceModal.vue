@@ -347,7 +347,6 @@
 					<button
 						v-if="editInvoice"
 						type="submit"
-						@click="updateInvoice"
 						class="px-3 py-2 rounded opacity-80 hover:opacity-100 bg-blue-500 duration-300"
 					>
 						Update Invoice
@@ -361,7 +360,7 @@
 <script>
 import Loading from "./Loading.vue";
 import firebaseDB from "../firebase/firebaseinit";
-import { mapMutations, mapState } from "vuex";
+import { mapMutations, mapState, mapActions } from "vuex";
 import { uid } from "uid";
 export default {
 	name: "InvoiceModal",
@@ -372,6 +371,7 @@ export default {
 
 	data() {
 		return {
+			docId: null,
 			billerStreetAddress: null,
 			billerCity: null,
 			billerZipCode: null,
@@ -408,33 +408,38 @@ export default {
 				this.dateOptions
 			);
 		} else {
-			// this.docId = this.currentInvoice.doc.id,
-         this.invoiceId = this.currentInvoice.invoiceId
-         this.billerStreetAddress = this.currentInvoice.billerStreetAddress
-         this.billerCity = this.currentInvoice.billerCity
-         this.billerZipCode = this.currentInvoice.billerZipCode
-         this.billerCountry = this.currentInvoice.billerCountry
-         this.clientName = this.currentInvoice.clientName
-         this.clientEmail = this.currentInvoice.clientEmail
-         this.clientStreetAddress = this.currentInvoice.clientStreetAddress
-         this.clientCity = this.currentInvoice.clientCity
-         this.clientZipCode = this.currentInvoice.clientZipCode
-         this.clientCountry = this.currentInvoice.clientCountry
-         this.invoiceDateUnix = this.currentInvoice.invoiceDateUnix
-         this.invoiceDate = this.currentInvoice.invoiceDate
-         this.paymentTerms = this.currentInvoice.paymentTerms
-         this.paymentDueDateUnix = this.currentInvoice.paymentDueDateUnix
-         this.paymentDueDate = this.currentInvoice.paymentDueDate
-         this.productDescription = this.currentInvoice.productDescription
-         this.invoiceItemList = this.currentInvoice.invoiceItemList
-         this.invoiceTotal = this.currentInvoice.invoiceTotal
-         this.invoicePending = this.currentInvoice.invoicePending
-         this.invoiceDraft = this.currentInvoice.invoiceDraft
-         this.invoicePaid = this.currentInvoice.invoicePaid
+			this.docId = this.currentInvoice.docId;
+			this.invoiceId = this.currentInvoice.invoiceId;
+			this.billerStreetAddress = this.currentInvoice.billerStreetAddress;
+			this.billerCity = this.currentInvoice.billerCity;
+			this.billerZipCode = this.currentInvoice.billerZipCode;
+			this.billerCountry = this.currentInvoice.billerCountry;
+			this.clientName = this.currentInvoice.clientName;
+			this.clientEmail = this.currentInvoice.clientEmail;
+			this.clientStreetAddress = this.currentInvoice.clientStreetAddress;
+			this.clientCity = this.currentInvoice.clientCity;
+			this.clientZipCode = this.currentInvoice.clientZipCode;
+			this.clientCountry = this.currentInvoice.clientCountry;
+			this.invoiceDateUnix = this.currentInvoice.invoiceDateUnix;
+			this.invoiceDate = this.currentInvoice.invoiceDate;
+			this.paymentTerms = this.currentInvoice.paymentTerms;
+			this.paymentDueDateUnix = this.currentInvoice.paymentDueDateUnix;
+			this.paymentDueDate = this.currentInvoice.paymentDueDate;
+			this.productDescription = this.currentInvoice.productDescription;
+			this.invoiceItemList = this.currentInvoice.invoiceItemList;
+			this.invoiceTotal = this.currentInvoice.invoiceTotal;
+			this.invoicePending = this.currentInvoice.invoicePending;
+			this.invoiceDraft = this.currentInvoice.invoiceDraft;
+			this.invoicePaid = this.currentInvoice.invoicePaid;
 		}
 	},
 	methods: {
-		...mapMutations(["TOGGLE_INVOICE", "TOGGLE_MODAL"]),
+		...mapMutations([
+			"TOGGLE_INVOICE",
+			"TOGGLE_MODAL",
+			"TOGGLE_EDIT_INVOICE",
+		]),
+		...mapActions(["UPDATE_INVOICE", "GET_INVOICES"]),
 
 		checkClick(event) {
 			if (event.target === this.$refs.invoiceWrap) {
@@ -486,7 +491,7 @@ export default {
 
 			this.calculateInvoiceTotal();
 
-			const dataBase = firebaseDB.collection("invoice").doc();
+			const dataBase = firebaseDB.collection("invoices").doc();
 
 			await dataBase.set({
 				invoiceId: uid(6),
@@ -510,6 +515,9 @@ export default {
 				invoiceDraft: this.invoiceDraft,
 				invoiceItemList: this.invoiceItemList,
 				invoiceTotal: this.invoiceTotal,
+				invoicePending: this.invoicePending,
+				invoiceDraft: this.invoiceDraft,
+				invoicePaid: null,
 			});
 
 			this.loading = false;
@@ -517,7 +525,51 @@ export default {
 			this.TOGGLE_INVOICE();
 		},
 
+		async updateInvoice() {
+			if (this.invoiceItemList.length <= 0) {
+				alert("Please ensure you filled out work items!");
+				return;
+			}
+			this.loading = true;
+
+			this.calculateInvoiceTotal();
+
+			const dataBase = firebaseDB.collection("invoices").doc(this.docId);
+
+			await dataBase.update({
+				billerStreetAddress: this.billerStreetAddress,
+				billerCity: this.billerCity,
+				billerZipCode: this.billerZipCode,
+				billerCountry: this.billerCountry,
+				clientName: this.clientName,
+				clientEmail: this.clientEmail,
+				clientStreetAddress: this.clientStreetAddress,
+				clientCity: this.clientCity,
+				clientZipCode: this.clientZipCode,
+				clientCountry: this.clientCountry,
+				paymentTerms: this.paymentTerms,
+				paymentDueDate: this.paymentDueDate,
+				paymentDueDateUnix: this.paymentDueDateUnix,
+				productDescription: this.productDescription,
+				invoiceItemList: this.invoiceItemList,
+				invoiceTotal: this.invoiceTotal,
+			});
+
+			this.loading = false;
+
+			const data = {
+				docId: this.docId,
+				routeId: this.$route.params.invoiceId,
+			};
+
+			this.UPDATE_INVOICE(data);
+		},
+
 		submitForm() {
+			if (this.editInvoice) {
+				this.updateInvoice();
+				return;
+			}
 			this.uploadInvoice();
 		},
 	},
