@@ -1,5 +1,4 @@
 <template>
-   <!-- <div class="bg-red-200 h-screen" v-if="!invoicesLoaded" ></div> -->
    <Loading v-if="!invoicesLoaded" ></Loading>
    <div v-else class="bg-neutral-100">
       <div

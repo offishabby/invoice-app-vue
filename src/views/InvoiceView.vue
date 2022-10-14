@@ -19,11 +19,11 @@
       <div class="left flex items-center">
         <span>Status</span>
         <div
-          class="status-button opacity-80 rounded-full p-2 text-white shadow-md flex ml-4"
+          class="status-button opacity-80 border-2 inline-flex justify-center rounded-full min-w-[60px] p-3 text-white shadow-md flex ml-4"
           :class="{
-            'bg-green-400': currentInvoice.invoicePaid,
-            'bg-blue-400': currentInvoice.invoiceDraft,
-            'bg-yellow-400': currentInvoice.invoicePending,
+            'bg-green-400 border-green-600': currentInvoice.invoicePaid,
+            'bg-blue-400 border-blue-600': currentInvoice.invoiceDraft,
+            'bg-yellow-500 border-yellow-600' : currentInvoice.invoicePending,
           }"
         >
           <span v-if="currentInvoice.invoicePaid">Paid</span>
@@ -124,8 +124,8 @@
           >
             <p class="text-left" >{{ item.itemName }}</p>
             <p class="text-right" >{{ item.qty }}</p>
-            <p class="text-right" >{{ item.price }}</p>
-            <p class="text-right" >{{ item.total }}</p>
+            <p class="text-right" >${{ item.price }}</p>
+            <p class="text-right" >${{ item.total }}</p>
           </div>
         </div>
         <div class="total flex p-6 justify-between">
@@ -153,7 +153,8 @@ export default {
 
   methods: {
     ...mapMutations(["SET_CURRENT_INVOICE", "TOGGLE_INVOICE", "SET_EDIT_INVOICE"]),
-    ...mapActions(["DELETE_INVOICE"]),
+    ...mapActions(["DELETE_INVOICE", "UPDATE_STATUS_TO_PENDING",
+      "UPDATE_STATUS_TO_PAID"]),
 
     getCurrentInvoice() {
       this.SET_CURRENT_INVOICE(this.$route.params.invoiceId);
@@ -167,6 +168,14 @@ export default {
     async deleteInvoice(docId) {
       await this.DELETE_INVOICE(docId)
       this.$router.push({name: 'Home'})
+    },
+
+    updateStatusToPaid(docId) {
+      this.UPDATE_STATUS_TO_PAID(docId)
+    },
+
+    updateStatusToPending(docId) {
+      this.UPDATE_STATUS_TO_PENDING(docId)
     }
   },
 

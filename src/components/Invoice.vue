@@ -12,11 +12,11 @@
 		<div class="right flex basis-2/5 items-center">
 			<span class="price grow text-base font-semibold">${{ invoice.invoiceTotal }}</span>
 			<div
-				class="status-button opacity-80 rounded-full p-2 text-white shadow-md flex"
+				class="status-button opacity-80 border-2 inline-flex justify-center rounded-full p-3 min-w-[60px] text-white shadow-md flex"
 				:class="{
-					'bg-green-400': invoice.invoicePaid,
-					'bg-blue-400': invoice.invoiceDraft,
-					'bg-yellow-400': invoice.invoicePending,
+					'bg-green-400 border-green-600': invoice.invoicePaid,
+					'bg-blue-400 border-blue-600': invoice.invoiceDraft,
+					'bg-yellow-500 border-yellow-600': invoice.invoicePending,
 				}"
 			>
 				<span v-if="invoice.invoicePaid">Paid</span>

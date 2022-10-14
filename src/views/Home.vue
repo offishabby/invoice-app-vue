@@ -20,25 +20,25 @@
           />
           <ul
             v-show="filterMenu"
-            class="filter-menu absolute w-30 top-10 list-none shadow-md bg-neutral-300"
+            class="filter-menu rounded absolute w-[100px] top-10 list-none shadow-md bg-neutral-300"
           >
             <li
-              class="text-sm py-1 hover:bg-neutral-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-neutral-200 duration-300 px-2 cursor-pointer"
             >
               Draft
             </li>
             <li
-              class="text-sm py-1 hover:bg-neutral-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-neutral-200 duration-300 px-2 cursor-pointer"
             >
               Pending
             </li>
             <li
-              class="text-sm py-1 hover:bg-neutral-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-neutral-200 duration-300 px-2 cursor-pointer"
             >
               Paid
             </li>
             <li
-              class="text-sm py-1 hover:bg-neutral-100 duration-300 px-2 cursor-pointer"
+              class="text-sm py-1 hover:bg-neutral-200 duration-300 px-2 cursor-pointer"
             >
               Clear filter
             </li>
@@ -99,7 +99,7 @@ export default {
 
     toggleFilterMenu() {
       this.filterMenu = !this.filterMenu;
-    },
+    }
   },
   computed: {
     ...mapState(["invoiceData"]),
