@@ -13,6 +13,11 @@
           @click="toggleFilterMenu"
         >
           <span class="text-sm">Filter by status</span>
+          <span
+            class="text-sm"
+            v-if="invoiceFilterStatus"
+            >: {{ invoiceFilterStatus }}
+          </span>
           <img
             src="../assets/icon-arrow-down.svg"
             alt="arrow down"
@@ -20,24 +25,28 @@
           />
           <ul
             v-show="filterMenu"
-            class="filter-menu rounded absolute w-[100px] top-10 list-none shadow-md bg-neutral-300"
+            class="filter-menu rounded absolute min-w-[100px] top-10 list-none shadow-md bg-neutral-300"
           >
             <li
+              @click="setInvoiceFilterStatus"
               class="text-sm py-1 hover:bg-neutral-200 duration-300 px-2 cursor-pointer"
             >
               Draft
             </li>
             <li
+              @click="setInvoiceFilterStatus"
               class="text-sm py-1 hover:bg-neutral-200 duration-300 px-2 cursor-pointer"
             >
               Pending
             </li>
             <li
+              @click="setInvoiceFilterStatus"
               class="text-sm py-1 hover:bg-neutral-200 duration-300 px-2 cursor-pointer"
             >
               Paid
             </li>
             <li
+              @click="setInvoiceFilterStatus"
               class="text-sm py-1 hover:bg-neutral-200 duration-300 px-2 cursor-pointer"
             >
               Clear filter
@@ -65,15 +74,37 @@
     <!-- invoices -->
     <div v-if="invoiceData.length">
       <Invoice
-        v-for="(invoice, idx) in invoiceData"
+        v-for="(invoice, idx) in filteredInvoices"
         :invoice="invoice"
         :key="idx"
       />
     </div>
-    <div v-else class="flex flex-col items-center mt-[100px] ">
-      <img class="w-[214px] h-[200px]" src="../assets/illustration-empty.svg" alt="">
-      <h3 class="text-2xl mt-10 font-bold" >You have no Invoices</h3>
-      <p class="text-center text-sm font-light mt-2 mw-[300px]" >You can create new Invoice by clicking New Invoice button</p>
+
+    <div
+      v-else
+      class="flex flex-col items-center mt-[100px]"
+    >
+      <img
+        class="w-[214px] h-[200px]"
+        src="../assets/illustration-empty.svg"
+        alt=""
+      />
+      <h3 class="text-2xl mt-10 font-bold">You have no Invoices</h3>
+      <p class="text-center text-sm font-light mt-2 mw-[300px]">
+        You can create new Invoice by clicking New Invoice button
+      </p>
+    </div>
+
+    <div
+      v-if="!filteredInvoices.length"
+      class="flex flex-col items-center mt-[100px]"
+    >
+      <img
+        class="w-[214px] h-[200px]"
+        src="../assets/illustration-empty.svg"
+        alt=""
+      />
+      <h3 class="text-2xl mt-10 font-bold">You have no Invoices with such status</h3>
     </div>
   </div>
 </template>
@@ -87,22 +118,59 @@ export default {
   data() {
     return {
       filterMenu: false,
+      invoiceFilterStatus: null,
     };
   },
   methods: {
     ...mapMutations(["TOGGLE_INVOICE", "SET_EDIT_INVOICE"]),
 
     newInvoice() {
-      this.SET_EDIT_INVOICE(false)
+      this.SET_EDIT_INVOICE(false);
       this.TOGGLE_INVOICE();
     },
 
     toggleFilterMenu() {
       this.filterMenu = !this.filterMenu;
-    }
+    },
+
+    setInvoiceFilterStatus(event) {
+      if (event.target.innerText === "Clear filter") {
+        this.invoiceFilterStatus = null;
+        return;
+      }
+
+      this.invoiceFilterStatus = event.target.innerText;
+    },
   },
   computed: {
     ...mapState(["invoiceData"]),
+
+    filteredInvoices() {
+
+      // return this.invoiceData.filter(invoice => {
+      //   if (this.invoiceFilterStatus === 'Draft') {
+      //     return invoice.invoiceDraft === true
+      //   }
+      //   if (this.invoiceFilterStatus === 'Pending') {
+      //     return invoice.invoicePending === true
+      //   }
+      //   if (this.invoiceFilterStatus === 'Paid') {
+      //     return invoice.invoicePaid === true
+      //   }
+      //   return true
+      // })
+
+      switch(this.invoiceFilterStatus){
+        case "Draft":
+          return this.invoiceData.filter(invoice => invoice.invoiceDraft)
+        case "Pending":
+          return this.invoiceData.filter(invoice => invoice.invoicePending)
+        case "Paid":
+          return this.invoiceData.filter(invoice => invoice.invoicePaid)
+        default:
+          return this.invoiceData
+      }
+    }
   },
 };
 </script>
