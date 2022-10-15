@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import 'firebase/firestore'
 
+// Here you put your firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDbGl5qY8EhplU0zguL_w3WxeuOHczWFrU",
   authDomain: "invoice-app-98320.firebaseapp.com",

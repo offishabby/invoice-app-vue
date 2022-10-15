@@ -2,11 +2,11 @@
 	<div
 		@click="checkClick"
 		ref="invoiceWrap"
-		class="invoice-wrap z-10 fixed top-[64px] bg-transparent w-full left-0 md:top-0 md:left-[64px] h-screen overflow-auto flex flex-col md:pb-0 pb-14"
+		class="z-10 fixed top-[64px] bg-transparent w-full left-0 md:top-0 md:left-[64px] h-screen overflow-auto flex flex-col md:pb-0 pb-14"
 	>
 		<form
 			@submit.prevent="submitForm"
-			class="relative w-full max-w-2xl shadow-2xl invoice-content text-neutral-600 bg-neutral-300 p-14"
+			class="relative w-full max-w-2xl shadow-2xl text-neutral-600 bg-neutral-300 p-14"
 		>
 			<Loading v-show="loading" />
 			<h1
@@ -54,7 +54,7 @@
 							v-model="billerCity"
 						/>
 					</div>
-					<div class="input w-[30%] flex flex-col">
+					<div class="w-[30%] flex flex-col">
 						<label
 							class="mb-1.5 text-sm"
 							for="billerZipCode"
@@ -68,7 +68,7 @@
 							v-model="billerZipCode"
 						/>
 					</div>
-					<div class="input w-[30%] flex flex-col">
+					<div class="w-[30%] flex flex-col">
 						<label
 							class="mb-1.5 text-sm"
 							for="billerCountry"
@@ -86,9 +86,9 @@
 			</div>
 
 			<!-- Bill To -->
-			<div class="flex flex-col bill-from">
+			<div class="flex flex-col">
 				<h4 class="my-6 text-sm underline">Bill To</h4>
-				<div class="flex flex-col input">
+				<div class="flex flex-col">
 					<label
 						class="mb-1.5 text-sm"
 						for="clientName"
@@ -102,7 +102,7 @@
 						v-model="clientName"
 					/>
 				</div>
-				<div class="flex flex-col input">
+				<div class="flex flex-col">
 					<label
 						class="mb-1.5 text-sm"
 						for="clientEmail"
@@ -116,7 +116,7 @@
 						v-model="clientEmail"
 					/>
 				</div>
-				<div class="flex flex-col input">
+				<div class="flex flex-col">
 					<label
 						class="mb-1.5 text-sm"
 						for="clientStreetAddress"
@@ -130,8 +130,8 @@
 						v-model="clientStreetAddress"
 					/>
 				</div>
-				<div class="flex justify-between location-details">
-					<div class="input w-[30%] flex flex-col">
+				<div class="flex justify-between">
+					<div class="w-[30%] flex flex-col">
 						<label
 							class="mb-1.5 text-sm"
 							for="clientCity"
@@ -145,7 +145,7 @@
 							v-model="clientCity"
 						/>
 					</div>
-					<div class="input w-[30%] flex flex-col">
+					<div class="w-[30%] flex flex-col">
 						<label
 							class="mb-1.5 text-sm"
 							for="clientZipCode"
@@ -159,7 +159,7 @@
 							v-model="clientZipCode"
 						/>
 					</div>
-					<div class="input w-[30%] flex flex-col">
+					<div class="w-[30%] flex flex-col">
 						<label
 							class="mb-1.5 text-sm"
 							for="clientCountry"
@@ -177,8 +177,8 @@
 			</div>
 
 			<!-- Invoice work details -->
-			<div class="flex flex-col invoce-work">
-				<div class="flex justify-between payment">
+			<div class="flex flex-col">
+				<div class="flex justify-between">
 					<div class="input w-[45%] flex flex-col">
 						<label
 							class="mb-1.5 text-sm"
@@ -193,7 +193,7 @@
 							v-model="invoiceDate"
 						/>
 					</div>
-					<div class="input flex w-[45%] flex-col">
+					<div class="flex w-[45%] flex-col">
 						<label
 							class="mb-1.5 text-sm"
 							for="paymentDueDateUnix"
@@ -224,43 +224,39 @@
 						<option value="60">Next 60 days</option>
 					</select>
 				</div>
-				<div class="flex flex-col input">
+				<div class="flex flex-col">
 					<label
 						class="mb-1.5 text-sm"
 						for="productDescription"
 						>Product Description</label
 					>
 					<input
-						class="px-3 py-1 mb-6 border-b-2 outline-none border-neutral-400 rounded ext-slate-800"
+						class="px-3 py-1 mb-6 border-b-2 outline-none border-neutral-400 rounded text-slate-800"
 						disabled
 						type="text"
 						id="productDescription"
 						v-model="productDescription"
 					/>
 				</div>
-				<div class="work-items">
+				<div>
 					<h3 class="mb-4 text-lg">Items List</h3>
 
 					<!-- my container for items -->
 					<div class="flex flex-col">
 						<div class="flex mb-2 text-sm">
-							<div class="text-left font-bold item-name basis-[50%]">
+							<div class="text-left font-bold basis-[50%]">
 								Item Name
 							</div>
-							<div class="text-left font-bold qty basis-[10%]">Qty</div>
-							<div class="text-left font-bold price basis-[15%]">
-								Price
-							</div>
-							<div class="text-left font-bold total basis-[15%]">
-								Total
-							</div>
+							<div class="text-left font-bold basis-[10%]">Qty</div>
+							<div class="text-left font-bold basis-[15%]">Price</div>
+							<div class="text-left font-bold basis-[15%]">Total</div>
 						</div>
 						<div
 							class="relative flex mb-3 text-sm"
 							v-for="(item, index) in invoiceItemList"
 							:key="index"
 						>
-							<div class="item-name basis-[50%] pr-1.5">
+							<div class="basis-[50%] pr-1.5">
 								<input
 									class="w-full border-neutral-400 border-b-2 rounded outline-none text-slate-800 px-1.5 py-1"
 									type="text"
@@ -289,15 +285,9 @@
 							</div>
 							<div
 								@click="deleteInvoiceItem(item.id)"
-								class="total basis-[10%] flex items-center justify-center border-2 bg-red-400 hover:bg-red-500 duration-300 text-white"
+								class="basis-[10%] flex items-center justify-center border-2 bg-red-400 hover:bg-red-500 duration-300 text-white"
 							>
 								Delete
-								<!-- <img
-									@click="deleteInvoiceItem(item.id)"
-									class="w-3 h-4"
-									src="../assets/icon-delete.svg"
-									alt="delete"
-								/> -->
 							</div>
 						</div>
 					</div>
@@ -306,18 +296,13 @@
 						@click="addNewInvoiceItem"
 						class="flex justify-center p-2 my-4 align-middle text-white rounded opacity-80 hover:opacity-100 bg-blue-500 duration-300"
 					>
-						<!-- <img
-							class="h-[20px] w-auto self-center mr-1"
-							src="../assets/icon-plus.svg"
-							alt=""
-						/> -->
 						Add New Item
 					</div>
 				</div>
 			</div>
 
 			<!-- Save/Exit -->
-			<div class="flex justify-between text-white save">
+			<div class="flex justify-between text-white">
 				<div class="flex right">
 					<button
 						type="button"
@@ -491,7 +476,7 @@ export default {
 
 			this.calculateInvoiceTotal();
 
-			const dataBase = firebaseDB.collection("invoices").doc();
+			const dataBase = firebaseDB.collection(this.FIREBASE_COLLECTION_NAME).doc();
 
 			await dataBase.set({
 				invoiceId: uid(6),
@@ -524,7 +509,7 @@ export default {
 
 			this.TOGGLE_INVOICE();
 
-			this.GET_INVOICES()
+			this.GET_INVOICES();
 		},
 
 		async updateInvoice() {
@@ -536,7 +521,7 @@ export default {
 
 			this.calculateInvoiceTotal();
 
-			const dataBase = firebaseDB.collection("invoices").doc(this.docId);
+			const dataBase = firebaseDB.collection(this.FIREBASE_COLLECTION_NAME).doc(this.docId);
 
 			await dataBase.update({
 				billerStreetAddress: this.billerStreetAddress,
@@ -576,7 +561,7 @@ export default {
 		},
 	},
 	computed: {
-		...mapState(["editInvoice", "currentInvoice"]),
+		...mapState(["editInvoice", "currentInvoice", "FIREBASE_COLLECTION_NAME"]),
 	},
 	watch: {
 		paymentTerms() {
@@ -592,5 +577,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="css" scoped></style>

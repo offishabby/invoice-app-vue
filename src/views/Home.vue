@@ -1,7 +1,7 @@
 <template>
-  <div class="home font-normal max-w-[1000px] w-[80%] mx-auto text-neutral-600">
+  <div class="font-normal max-w-[1000px] w-[80%] mx-auto text-neutral-600">
     <!-- header -->
-    <div class="header my-12 flex justify-center">
+    <div class="my-12 flex justify-center">
       <div class="flex flex-col flex-1">
         <h1 class="text-2xl font-bold">Invoices</h1>
         <span>You have {{ invoiceData.length }} invoices total</span>
@@ -16,7 +16,8 @@
           <span
             class="text-sm"
             v-if="invoiceFilterStatus"
-            >: {{ invoiceFilterStatus }}
+          >
+            : {{ invoiceFilterStatus }}
           </span>
           <img
             src="../assets/icon-arrow-down.svg"
@@ -25,7 +26,7 @@
           />
           <ul
             v-show="filterMenu"
-            class="filter-menu rounded absolute min-w-[100px] top-10 list-none shadow-md bg-neutral-300"
+            class="rounded absolute min-w-[100px] top-10 list-none shadow-md bg-neutral-300"
           >
             <li
               @click="setInvoiceFilterStatus"
@@ -104,7 +105,9 @@
         src="../assets/illustration-empty.svg"
         alt=""
       />
-      <h3 class="text-2xl mt-10 font-bold">You have no Invoices with such status</h3>
+      <h3 class="text-2xl mt-10 font-bold">
+        You have no Invoices with such status
+      </h3>
     </div>
   </div>
 </template>
@@ -146,7 +149,6 @@ export default {
     ...mapState(["invoiceData"]),
 
     filteredInvoices() {
-
       // return this.invoiceData.filter(invoice => {
       //   if (this.invoiceFilterStatus === 'Draft') {
       //     return invoice.invoiceDraft === true
@@ -160,17 +162,17 @@ export default {
       //   return true
       // })
 
-      switch(this.invoiceFilterStatus){
+      switch (this.invoiceFilterStatus) {
         case "Draft":
-          return this.invoiceData.filter(invoice => invoice.invoiceDraft)
+          return this.invoiceData.filter((invoice) => invoice.invoiceDraft);
         case "Pending":
-          return this.invoiceData.filter(invoice => invoice.invoicePending)
+          return this.invoiceData.filter((invoice) => invoice.invoicePending);
         case "Paid":
-          return this.invoiceData.filter(invoice => invoice.invoicePaid)
+          return this.invoiceData.filter((invoice) => invoice.invoicePaid);
         default:
-          return this.invoiceData
+          return this.invoiceData;
       }
-    }
+    },
   },
 };
 </script>

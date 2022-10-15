@@ -1,6 +1,9 @@
 <template>
-   <Loading v-if="!invoicesLoaded" ></Loading>
-   <div v-else class="bg-neutral-100">
+   <Loading v-if="!invoicesLoaded"></Loading>
+   <div
+      v-else
+      class="bg-neutral-100"
+   >
       <div
          v-if="!isMobile"
          class="min-h-screen flex flex-col md:flex-row md:min-width-screen"
@@ -41,12 +44,11 @@ export default {
       };
    },
    created() {
-      this.GET_INVOICES()
+      this.GET_INVOICES();
       this.checkMobile();
       window.addEventListener("resize", this.checkMobile);
    },
    methods: {
-
       ...mapActions(["GET_INVOICES"]),
 
       checkMobile: function () {

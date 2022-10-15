@@ -1,5 +1,5 @@
 <template>
-  <div class="invoice-view my-12 max-w-[1000px] w-[75%] mx-auto text-neutral-600">
+  <div class="my-12 max-w-[1000px] w-[75%] mx-auto text-neutral-600">
     <router-link
       class="nav-link no-underline flex mb-8 items-center text-lg"
       :to="{ name: 'Home' }"
@@ -14,16 +14,16 @@
 
     <!-- Header -->
     <div
-      class="header flex items-center rounded px-6 py-8 text-base rounded border-2 border-neutral-500 shadow-2xl bg-neutral-200 mb-4"
+      class="flex items-center rounded px-6 py-8 text-base rounded border-2 border-neutral-500 shadow-2xl bg-neutral-200 mb-4"
     >
       <div class="left flex items-center">
         <span>Status</span>
         <div
-          class="status-button opacity-80 border-2 inline-flex justify-center rounded-full min-w-[60px] p-3 text-white shadow-md flex ml-4"
+          class="opacity-80 border-2 inline-flex justify-center rounded-full min-w-[60px] p-3 text-white shadow-md flex ml-4"
           :class="{
             'bg-green-400 border-green-600': currentInvoice.invoicePaid,
             'bg-blue-400 border-blue-600': currentInvoice.invoiceDraft,
-            'bg-yellow-500 border-yellow-600' : currentInvoice.invoicePending,
+            'bg-yellow-500 border-yellow-600': currentInvoice.invoicePending,
           }"
         >
           <span v-if="currentInvoice.invoicePaid">Paid</span>
@@ -31,7 +31,7 @@
           <span v-if="currentInvoice.invoicePending">Pending</span>
         </div>
       </div>
-      <div class="right flex flex-1 justify-end">
+      <div class="flex flex-1 justify-end">
         <button
           @click="toggleEditInvoice"
           class="min-w-[70px] bg-blue-500 ml-4 rounded opacity-80 hover:opacity-100 duration-300 text-white p-2 shadow-md"
@@ -63,16 +63,16 @@
 
     <!-- Invoice Details -->
     <div
-      class="invoice-details p-12 flex flex-col rounded border-2 border-neutral-500 shadow-2xl bg-neutral-200"
+      class="p-12 flex flex-col rounded border-2 border-neutral-500 shadow-2xl bg-neutral-200"
     >
-      <div class="top flex">
-        <div class="left flex flex-col flex-1">
+      <div class="flex">
+        <div class="flex flex-col flex-1">
           <p class="uppercase underline text-lg font-bold mb-2">
             <span>#</span> {{ currentInvoice.invoiceId }}
           </p>
           <p class="text-base mb-2">{{ currentInvoice.productDescription }}</p>
         </div>
-        <div class="right flex flex-col flex-0 items-start">
+        <div class="flex flex-col flex-0 items-start">
           <p>{{ currentInvoice.billerStreetAddress }}</p>
           <p>{{ currentInvoice.billerCity }}</p>
           <p>{{ currentInvoice.billerZipCode }}</p>
@@ -80,57 +80,59 @@
         </div>
       </div>
 
-      <div class="middle flex mt-12 gap-5">
+      <div class="flex mt-12 gap-5">
         <div class="payment flex flex-col flex-1 justify-between">
           <div>
             <h4 class="font-bold mb-1">Invoice Date</h4>
-            <p class="text-lg font-medium" >
+            <p class="text-lg font-medium">
               {{ currentInvoice.invoiceDate }}
             </p>
           </div>
           <div>
             <h4 class="font-bold mb-1">Payment Date</h4>
-            <p class="text-lg font-medium" >
+            <p class="text-lg font-medium">
               {{ currentInvoice.paymentDueDate }}
             </p>
           </div>
         </div>
-        <div class="bill flex flex-col flex-1">
+        <div class="flex flex-col flex-1">
           <h4 class="font-bold mb-1">Bill To</h4>
           <p class="text-lg font-medium">{{ currentInvoice.clientName }}</p>
-          <p class="mt-2" >{{ currentInvoice.clientStreetAddress }}</p>
+          <p class="mt-2">{{ currentInvoice.clientStreetAddress }}</p>
           <p>{{ currentInvoice.clientCity }}</p>
           <p>{{ currentInvoice.clientZipCode }}</p>
           <p>{{ currentInvoice.clientCountry }}</p>
         </div>
-        <div class="send-to flex flex-col flex-1">
+        <div class="flex flex-col flex-1">
           <h4 class="font-bold mb-1">Send To</h4>
           <p>{{ currentInvoice.clientEmail }}</p>
         </div>
       </div>
 
-      <div class="bottom flex flex-col mt-10">
-        <div class="billing-items p-8 rounded border-2 border-neutral-500 bg-neutral-300">
-          <div class="heading mb-4 grid grid-cols-[3fr_1fr_1fr_1fr] font-semibold">
+      <div class="flex flex-col mt-10">
+        <div class="p-8 rounded border-2 border-neutral-500 bg-neutral-300">
+          <div class="mb-4 grid grid-cols-[3fr_1fr_1fr_1fr] font-semibold">
             <p class="text-left">Item name</p>
-            <p class="text-right" >Quantity</p>
-            <p class="text-right" >Price</p>
-            <p class="text-right" >Total</p>
+            <p class="text-right">Quantity</p>
+            <p class="text-right">Price</p>
+            <p class="text-right">Total</p>
           </div>
           <div
             v-for="(item, idx) in currentInvoice.invoiceItemList"
             :key="idx"
             class="item grid grid-cols-[3fr_1fr_1fr_1fr] mb-4 border-b-2 border-neutral-500 text-sm last:mb-0"
           >
-            <p class="text-left" >{{ item.itemName }}</p>
-            <p class="text-right" >{{ item.qty }}</p>
-            <p class="text-right" >${{ item.price }}</p>
-            <p class="text-right" >${{ item.total }}</p>
+            <p class="text-left">{{ item.itemName }}</p>
+            <p class="text-right">{{ item.qty }}</p>
+            <p class="text-right">${{ item.price }}</p>
+            <p class="text-right">${{ item.total }}</p>
           </div>
         </div>
-        <div class="total flex p-6 justify-between">
+        <div class="flex p-6 justify-between">
           <p>Amount Due</p>
-          <p class="text-xl font-bold text-right" >${{ currentInvoice.invoiceTotal }}</p>
+          <p class="text-xl font-bold text-right">
+            ${{ currentInvoice.invoiceTotal }}
+          </p>
         </div>
       </div>
     </div>
@@ -152,31 +154,38 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["SET_CURRENT_INVOICE", "TOGGLE_INVOICE", "SET_EDIT_INVOICE"]),
-    ...mapActions(["DELETE_INVOICE", "UPDATE_STATUS_TO_PENDING",
-      "UPDATE_STATUS_TO_PAID"]),
+    ...mapMutations([
+      "SET_CURRENT_INVOICE",
+      "TOGGLE_INVOICE",
+      "SET_EDIT_INVOICE",
+    ]),
+    ...mapActions([
+      "DELETE_INVOICE",
+      "UPDATE_STATUS_TO_PENDING",
+      "UPDATE_STATUS_TO_PAID",
+    ]),
 
     getCurrentInvoice() {
       this.SET_CURRENT_INVOICE(this.$route.params.invoiceId);
     },
 
     toggleEditInvoice() {
-      this.SET_EDIT_INVOICE(true)
-      this.TOGGLE_INVOICE()
+      this.SET_EDIT_INVOICE(true);
+      this.TOGGLE_INVOICE();
     },
 
     async deleteInvoice(docId) {
-      await this.DELETE_INVOICE(docId)
-      this.$router.push({name: 'Home'})
+      await this.DELETE_INVOICE(docId);
+      this.$router.push({ name: "Home" });
     },
 
     updateStatusToPaid(docId) {
-      this.UPDATE_STATUS_TO_PAID(docId)
+      this.UPDATE_STATUS_TO_PAID(docId);
     },
 
     updateStatusToPending(docId) {
-      this.UPDATE_STATUS_TO_PENDING(docId)
-    }
+      this.UPDATE_STATUS_TO_PENDING(docId);
+    },
   },
 
   computed: {
@@ -184,5 +193,3 @@ export default {
   },
 };
 </script>
-
-<style lang="css" scoped></style>
